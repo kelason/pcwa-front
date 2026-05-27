@@ -5,7 +5,7 @@ export const ApiConnectionStatus = () => {
   const [status, setStatus] = useState<'loading' | 'online' | 'offline'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const getenv = (name: string, defaultValue: string) => (import.meta.env as Record<string, string | undefined>)[name] || defaultValue;
-  const baseUrl = getenv("REACT_APP_BACKEND_API_BASE_URL", "http://127.0.0.1:8000");
+  const baseUrl = getenv("VITE_BACKEND_API_BASE_URL", "http://127.0.0.1:8000");
 
   useEffect(() => {
     const checkConnection = async () => {

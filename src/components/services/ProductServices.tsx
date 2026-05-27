@@ -1,6 +1,6 @@
 import { productApi, getProducts, type Product } from '../../../api';
 
-const getBaseUrl = () => (import.meta.env as Record<string, string | undefined>).REACT_APP_BACKEND_API_BASE_URL || 'http://127.0.0.1:8000';
+const getBaseUrl = () => (import.meta.env as Record<string, string | undefined>).VITE_BACKEND_API_BASE_URL || 'http://127.0.0.1:8000';
 
 export const ProductServices = {
   /**
