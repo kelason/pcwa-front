@@ -1,9 +1,5 @@
 # Cognizant Assessment - Frontend
 
-## 🌐 Live API
-
-The production API is accessible at: [https://pcwa-front.vercel.app/](https://pcwa-front.vercel.app/)
-
 ## Description
 This project is a frontend application developed for the Cognizant assessment. It is built using modern tooling to ensure high performance, type safety, and strict code quality standards. The application leverages Vite for fast development and bundling, and TypeScript for robust type checking.
 
@@ -12,6 +8,11 @@ This project is a frontend application developed for the Cognizant assessment. I
 - **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript.
 - **Linting:** [ESLint](https://eslint.org/) with [TypeScript ESLint](https://typescript-eslint.io/) - For identifying and reporting on patterns in code.
 - **CSS Engine:** [Lightning CSS](https://lightningcss.dev/) - An extremely fast CSS parser, transformer, and minifier.
+
+## Prototype
+
+You can view the interactive Figma prototype of this application here:
+[Figma Prototype Site](https://voice-punch-44623607.figma.site/)
 
 ## Prerequisites
 Ensure you have the following installed on your machine:
@@ -48,11 +49,10 @@ Ensure you have the following installed on your machine:
 
 ## Configuration Inferred
 - **Environment Variables:** The application supports environment variables through `.env` files. Variables prefixed with `VITE_` are exposed to your client-side code.
-
-  Create a `.env` file in the root directory:
-  ```env
+  ```
   # Example .env file
-  VITE_BACKEND_API_BASE_URL="http://127.0.0.1:8000"
+  VITE_API_URL=http://localhost:8080/api
+  VITE_ANALYTICS_KEY=your_analytics_key
   ```
   For more details on how Vite handles environment variables, refer to the Vite documentation.
 
