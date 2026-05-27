@@ -17,7 +17,7 @@ const getApiBaseUrl = (() => {
   let baseUrl: string | undefined;
   return () => {
     if (!baseUrl) {
-      baseUrl = (import.meta.env.BACKEND_API_BASE_URL as string) || 
+      baseUrl = (import.meta.env.REACT_APP_BACKEND_API_BASE_URL as string) || 
                 "http://127.0.0.1:8000";
     }
     return baseUrl;
