@@ -17,7 +17,6 @@ export default function ProductCatalog() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [filterCategoryId, setFilterCategoryId] = useState<string | 'All Categories'>('All Categories');
   const [totalCount, setTotalCount] = useState(0);
-  const [globalTotal, setGlobalTotal] = useState(0);
 
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -71,9 +70,6 @@ export default function ProductCatalog() {
           productsCacheRef.current[cacheKey] = stringified;
           setTotalCount(newTotal);
           
-          // Update global total only when 'All Categories' is selected to get the full catalog size
-          if (filterCategoryId === 'All Categories') setGlobalTotal(newTotal);
-          
           setProducts(productsArray);
         }
       } catch (err) {
@@ -109,7 +105,6 @@ export default function ProductCatalog() {
       productsCacheRef.current[cacheKey] = JSON.stringify(updatedProducts);
       setProducts(updatedProducts);
       setTotalCount(prev => prev - 1);
-      setGlobalTotal(prev => prev - 1);
       setProductToDelete(null);
 
       // If we deleted the last item on the page, go back one page if possible
@@ -163,7 +158,6 @@ export default function ProductCatalog() {
           setProducts(updatedProducts);
         }
         setTotalCount(prev => prev + 1);
-        setGlobalTotal(prev => prev + 1);
       }
       setIsModalOpen(false);
     } catch (err) {
