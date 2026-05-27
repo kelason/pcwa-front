@@ -3,9 +3,9 @@ import { Button } from './components/atoms/Button';
 import { FilterBar } from './components/molecules/FilterBar';
 import { ProductCard } from './components/organisms/ProductCard';
 import { ProductModal } from './components/organisms/ProductModal';
-import { ProductServices } from './services/ProductServices';
+import { ProductServices } from './components/services/ProductServices';
 import { ApiConnectionStatus } from './components/ApiConnectionStatus';
-import { CategoryServices } from './services/CategoryServices';
+import { CategoryServices } from './components/services/CategoryServices';
 import { Modal } from './components/atoms/Modal';
 import { type Product, type Category } from '../api';
 

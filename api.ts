@@ -1,8 +1,17 @@
 /// <reference types="vite/client" />
-import type { Product, Category } from './src/product';
 
-// Re-exporting types for consumers of this API module
-export type { Product, Category };
+export interface Category {
+  id: string | number;
+  name: string;
+}
+
+export interface Product {
+  id: string | number;
+  name: string;
+  description: string;
+  price: number;
+  category_id: string | number;
+}
 
 const getApiBaseUrl = (() => {
   let baseUrl: string | undefined;
@@ -95,18 +104,18 @@ export const productApi = {
         // No content, return a default success message
         return { message: 'Product deleted successfully' };
       }
-      // Parse JSON if possible, otherwise fallback to default success message
-      return response.json().catch(() => ({ message: 'Product deleted successfully' })) as Promise<{ message: string }>;
+      // If there's content, parse it; otherwise fallback to default success message
+      return response.json().catch(() => ({ message: 'Product deleted successfully' }));
     } else {
       // Use const and inline catch to resolve the linting warning and prevent SyntaxErrors on empty error bodies
-      const errorDetail = await response.json().catch(() => null);
+      const errorDetail = await response.json().catch(() => ({}));
       
-      if (!errorDetail) {
+      if (!errorDetail || Object.keys(errorDetail).length === 0) {
         throw new Error(`Failed to delete product: Server responded with status ${response.status}`);
       }
 
       console.error('Validation Error Details:', errorDetail);
       throw new Error(`Failed to delete product: ${JSON.stringify(errorDetail.detail || 'Unknown error')}`);
     }
-  },
+  }
 };

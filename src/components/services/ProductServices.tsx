@@ -1,4 +1,4 @@
-import { productApi, getProducts, type Product } from '../../api';
+import { productApi, getProducts, type Product } from '../../../api';
 
 const getBaseUrl = () => (import.meta.env as Record<string, string | undefined>).BACKEND_API_BASE_URL || 'http://127.0.0.1:8000';
 

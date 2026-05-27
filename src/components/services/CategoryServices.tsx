@@ -1,4 +1,4 @@
-import { getCategories, type Category } from '../../api';
+import { getCategories, type Category } from '../../../api';
 
 export const CategoryServices = {
   /**
