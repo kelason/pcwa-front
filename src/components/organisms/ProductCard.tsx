@@ -13,14 +13,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, categories, o
   const categoryName = categories.find(c => c.id === product.category_id)?.name || 'Unknown Category';
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#65B891]/20">
-      <h2 className="text-xl font-bold text-[#00241B] mb-2">{product.name}</h2>
-      <p className="text-[#EA7317] font-semibold text-lg mb-4">${Number(product.price).toFixed(2)}</p>
-      
-      <div className="mb-8">
-        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#00241B] border border-[#65B891] rounded-full bg-[#93E5AB]/20">
-          {categoryName}
-        </span>
+    <div className="bg-white rounded-xl border border-slate-200 p-2 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#65B891]/20">      
+      <div className="border-[#00241B] rounded-xl bg-[#00241B]/5 p-4 mb-4">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-xl font-bold text-[#00241B] text-left">{product.name}</h2>
+          <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#00241B] border border-[#65B891] rounded-full bg-[#93E5AB]/20">
+            {categoryName}
+          </span>
+        </div>
+        <p className="text-[#65B891] font-semibold text-lg mb-4 text-left">${Number(product.price).toFixed(2)}</p>
       </div>
       
       <div className="mt-auto flex gap-4 pt-4 border-t border-slate-50">
