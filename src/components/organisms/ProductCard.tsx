@@ -13,17 +13,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, categories, o
   const categoryName = categories.find(c => c.id === product.category_id)?.name || 'Unknown Category';
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm flex flex-col hover:shadow-md transition-shadow">
-      <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-      <p className="text-blue-600 text-lg mb-4">${Number(product.price).toFixed(2)}</p>
+    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#C4E2F5]/20">
+      <h2 className="text-xl font-bold text-[#2C5EAD] mb-2">{product.name}</h2>
+      <p className="text-[#4BB8FA] font-semibold text-lg mb-4">${Number(product.price).toFixed(2)}</p>
       
       <div className="mb-8">
-        <span className="inline-block px-3 py-1 text-sm text-blue-600 border border-blue-200 rounded-full bg-blue-50">
+        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#2C5EAD] border border-[#C4E2F5] rounded-full bg-[#C4E2F5]/20">
           {categoryName}
         </span>
       </div>
       
-      <div className="mt-auto flex gap-4 pt-4 border-t border-gray-100">
+      <div className="mt-auto flex gap-4 pt-4 border-t border-slate-50">
         <Button variant="ghost" onClick={() => onEdit(product)}>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
         </Button>

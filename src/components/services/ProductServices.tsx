@@ -1,4 +1,4 @@
-import { productApi, getProducts, type Product } from '../../../api';
+import { productApi, type Product } from '../../../api';
 
 const getBaseUrl = () => (import.meta.env as Record<string, string | undefined>).VITE_BACKEND_API_BASE_URL || 'http://127.0.0.1:8000';
 
@@ -6,19 +6,35 @@ export const ProductServices = {
   /**
    * Fetches products, optionally filtered by category.
    * @param categoryId The ID of the category to filter by, or 'All Categories' to fetch all products.
+   * @param page The current page number for pagination.
+   * @param limit The number of items per page for pagination.
    * @returns A promise that resolves to an array of products.
    */
-  fetchProducts: async (categoryId: string | 'All Categories'): Promise<Product[]> => {
-    if (categoryId === 'All Categories') {
-      return await getProducts();
-    } else {
-      const baseUrl = getBaseUrl();
-      const response = await fetch(`${baseUrl}/products/category/${categoryId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
+  fetchProducts: async (categoryId: string | 'All Categories', page: number): Promise<{ products: Product[], total: number }> => {
+    const baseUrl = getBaseUrl();
+    const params = new URLSearchParams();
+
+    // Match Python: category_id is an optional Query parameter
+    if (categoryId !== 'All Categories') {
+      params.append('category_id', categoryId);
     }
+    
+    // Match Python: page is a Query parameter
+    params.append('page', page.toString());
+
+    const url = `${baseUrl}/products/?${params.toString()}`;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    return {
+      products: data.items || [],
+      total: data.total || 0
+    };
   },
 
   /**
