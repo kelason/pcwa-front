@@ -53,7 +53,7 @@ export default function ProductCatalog() {
   const confirmDelete = async () => {
     if (!productToDelete) return;
     try {
-      await ProductServices.deleteProduct(productToDelete.id);
+      await ProductServices.deleteProduct(String(productToDelete.id));
       setProducts(products.filter(p => p.id !== productToDelete.id));
       setTotalCount(prev => prev - 1);
       setProductToDelete(null);
@@ -67,14 +67,14 @@ export default function ProductCatalog() {
     setFormData({ 
       name: product.name, 
       price: product.price.toString(), 
-      category_id: product.category_id 
+      category_id: String(product.category_id) 
     });
     setIsModalOpen(true);
   };
 
   const handleAddClick = () => {
     setEditingProduct(null);
-    setFormData({ name: '', price: '', category_id: categories.length > 0 ? categories[0].id : '' });
+    setFormData({ name: '', price: '', category_id: categories.length > 0 ? String(categories[0].id) : '' });
     setIsModalOpen(true);
   };
 
@@ -92,7 +92,7 @@ export default function ProductCatalog() {
     };
 
     try {
-      const savedProduct = await ProductServices.saveProduct(productData, editingProduct?.id);
+      const savedProduct = await ProductServices.saveProduct(productData, editingProduct?.id ? String(editingProduct.id) : undefined);
 
       if (editingProduct) {
         setProducts(products.map(p => (p.id === editingProduct.id ? savedProduct : p)));
