@@ -22,6 +22,70 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onSubmit,
 }) => {
   const [formData, setFormData] = useState(initialFormData);
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [priceError, setPriceError] = useState<string | null>(null);
+
+  if (!isOpen) return null;
+
+  const validateName = (name: string): string | null => {
+    if (name.trim().length === 0) {
+      return 'Product name cannot be empty.';
+    }
+    if (name.length < 1 || name.length > 25) {
+      return 'Product name must be between 1 and 25 characters.';
+    }
+    return null;
+  };
+
+  const validatePrice = (price: string): string | null => {
+    if (price.trim().length === 0) {
+      return 'Price cannot be empty.';
+    }
+    if (price.length < 1 || price.length > 8) {
+      return 'Price must be between 1 and 8 characters.';
+    }
+    const numValue = parseFloat(price);
+    if (isNaN(numValue) || numValue <= 0) {
+      return 'Price must be a valid positive number or must be greater than 0.';
+    }
+    return null;
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, name: value });
+    setNameError(validateName(value));
+  };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData({ ...formData, price: value });
+    setPriceError(validatePrice(value));
+  };
+
+  const handlePriceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Prevent 'e', 'E', '+', '-' characters in number input
+    if (['e', 'E', '+', '-'].includes(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Perform all validations before submission
+    const newNameError = validateName(formData.name);
+    const newPriceError = validatePrice(formData.price);
+
+    setNameError(newNameError);
+    setPriceError(newPriceError);
+
+    if (newNameError || newPriceError) {
+      return; // Prevent submission if there are errors
+    }
+
+    onSubmit(e, formData);
+  };
 
   return (
     <Modal
@@ -30,16 +94,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       title={editingProduct ? 'Edit Product' : 'Add New Product'}
     >
         
-        <form onSubmit={(e) => onSubmit(e, formData)} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <FormField label="Product Name">
             <input 
               type="text" 
               placeholder=" "
               required
+              minLength={1}
+              maxLength={25}
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={handleNameChange}
               className={FORM_INPUT_CLASSES}
             />
+            {nameError && <p className="text-red-500 text-xs mt-1">{nameError}</p>}
           </FormField>
           
           <FormField label="Price ($)">
@@ -49,10 +116,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               required
               step="0.01"
               min="0"
+              maxLength={8}
               value={formData.price}
-              onChange={(e) => setFormData({...formData, price: e.target.value})}
+              onChange={handlePriceChange}
+              onKeyDown={handlePriceKeyDown}
               className={FORM_INPUT_CLASSES}
             />
+            {priceError && <p className="text-red-500 text-xs mt-1">{priceError}</p>}
           </FormField>
 
           <FormField label="Category">

@@ -15,9 +15,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, categories, o
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-2 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#65B891]/20">      
       <div className="border-[#00241B] rounded-xl bg-[#00241B]/5 p-4 mb-4">
-        <div className="flex justify-between items-center mb-2">
-          <h2 className="text-xl font-bold text-[#00241B] text-left">{product.name}</h2>
-          <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#00241B] border border-[#65B891] rounded-full bg-[#93E5AB]/20">
+        <div className="flex justify-between items-start gap-2 mb-2">
+          <h2 className="text-xl font-bold text-[#00241B] text-left break-words min-w-0">{product.name}</h2>
+          <span className="shrink-0 inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#00241B] border border-[#65B891] rounded-full bg-[#93E5AB]/20">
             {categoryName}
           </span>
         </div>
