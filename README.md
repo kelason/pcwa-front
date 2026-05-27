@@ -1,76 +1,64 @@
-# React + TypeScript + Vite
+# Cognizant Assessment - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌐 Live API
 
-Currently, two official plugins are available:
+The production API is accessible at: [https://pcwa-front.vercel.app/](https://pcwa-front.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Description
+This project is a frontend application developed for the Cognizant assessment. It is built using modern tooling to ensure high performance, type safety, and strict code quality standards. The application leverages Vite for fast development and bundling, and TypeScript for robust type checking.
 
-## React Compiler
+## Tech Stack
+- **Bundler:** [Vite 6](https://vite.dev/) - Next generation frontend tooling.
+- **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript.
+- **Linting:** [ESLint](https://eslint.org/) with [TypeScript ESLint](https://typescript-eslint.io/) - For identifying and reporting on patterns in code.
+- **CSS Engine:** [Lightning CSS](https://lightningcss.dev/) - An extremely fast CSS parser, transformer, and minifier.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Prerequisites
+Ensure you have the following installed on your machine:
+- **Node.js**: `^20.19.0`, `^22.13.0`, or `>=24`.
+- **Package Manager**: `npm`, `pnpm`, or `yarn`.
 
-Note: This will impact Vite dev & build performances.
+## Installation Guide
 
-## Expanding the ESLint configuration
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd cognizant-assesment-front
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be accessible by default at `http://localhost:5173`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Available Scripts
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `npm run dev`: Starts the Vite development server with Hot Module Replacement (HMR).
+- `npm run build`: Compiles and minifies the application for production.
+- `npm run preview`: Locally previews the production build.
+- `npm run lint`: Runs ESLint to check for code consistency and errors.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configuration Inferred
+- **Environment Variables:** The application supports environment variables through `.env` files. Variables prefixed with `VITE_` are exposed to your client-side code.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  Create a `.env` file in the root directory:
+  ```env
+  # Example .env file
+  VITE_BACKEND_API_BASE_URL="http://127.0.0.1:8000"
+  ```
+  For more details on how Vite handles environment variables, refer to the Vite documentation.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# pcwa-front
+- **Vite:** Configured with TypeScript support and optimized dependency pre-bundling.
+- **ESLint:** Uses flat configuration (`eslint.config.js`) and member-ordering rules for cleaner class structures.
+- **TypeScript:** Strict type-checking enabled via `tsconfig.json`.
+
+---
+*Developed as part of a technical assessment.*
