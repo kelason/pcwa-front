@@ -13,12 +13,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, categories, o
   const categoryName = categories.find(c => c.id === product.category_id)?.name || 'Unknown Category';
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#C4E2F5]/20">
-      <h2 className="text-xl font-bold text-[#2C5EAD] mb-2">{product.name}</h2>
-      <p className="text-[#4BB8FA] font-semibold text-lg mb-4">${Number(product.price).toFixed(2)}</p>
+    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[#65B891]/20">
+      <h2 className="text-xl font-bold text-[#00241B] mb-2">{product.name}</h2>
+      <p className="text-[#EA7317] font-semibold text-lg mb-4">${Number(product.price).toFixed(2)}</p>
       
       <div className="mb-8">
-        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#2C5EAD] border border-[#C4E2F5] rounded-full bg-[#C4E2F5]/20">
+        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wide uppercase text-[#00241B] border border-[#65B891] rounded-full bg-[#93E5AB]/20">
           {categoryName}
         </span>
       </div>

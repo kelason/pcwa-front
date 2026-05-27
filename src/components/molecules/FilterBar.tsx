@@ -27,7 +27,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <select 
             value={currentFilter}
             onChange={(e) => onFilterChange(e.target.value)}
-            className="block w-56 pt-3 pl-3 pr-10 py-2 text-sm border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4BB8FA]/20 focus:border-[#4BB8FA] rounded-lg bg-[#FFFFFF] font-medium"
+            className="block w-56 pt-3 pl-3 pr-10 py-2 text-sm border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4E878C]/20 focus:border-[#4E878C] rounded-lg bg-[#FFFFFF] font-medium"
           >
             <option value="All Categories">All Categories</option>
             {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}

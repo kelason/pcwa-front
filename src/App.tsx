@@ -168,9 +168,9 @@ export default function ProductCatalog() {
   const displayedProducts = products || [];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] font-sans text-[#2C5EAD]">
+    <div className="min-h-screen bg-[#FFFFFF] font-sans text-[#00241B]">
       {/* Header */}
-      <header className="bg-[#2C5EAD] text-white px-8 py-5 flex justify-between items-center shadow-lg border-b border-[#4BB8FA]">
+      <header className="bg-[#00241B] text-white px-8 py-5 flex justify-between items-center shadow-lg border-b border-[#4E878C]">
         <h1 className="text-xl text-white font-bold tracking-tight">Product Catalog Dashboard</h1>
         <Button 
           onClick={handleAddClick}
@@ -242,9 +242,9 @@ export default function ProductCatalog() {
             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm text-slate-500 font-medium">
-                  Showing <span className="text-[#2C5EAD]">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-                  <span className="text-[#2C5EAD]">{Math.min(currentPage * itemsPerPage, totalCount)}</span> of{' '}
-                  <span className="text-[#2C5EAD]">{totalCount}</span> results
+                  Showing <span className="text-[#00241B]">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                  <span className="text-[#00241B]">{Math.min(currentPage * itemsPerPage, totalCount)}</span> of{' '}
+                  <span className="text-[#00241B]">{totalCount}</span> results
                 </p>
               </div>
               <div>
@@ -256,7 +256,7 @@ export default function ProductCatalog() {
                       aria-current={currentPage === i + 1 ? 'page' : undefined}
                       className={`relative inline-flex items-center px-4 py-2 text-sm font-bold border transition-all first:rounded-l-md last:rounded-r-md focus:z-20 ${
                         currentPage === i + 1
-                          ? 'z-10 bg-[#2C5EAD] text-white border-[#2C5EAD]'
+                          ? 'z-10 bg-[#00241B] text-white border-[#00241B]'
                           : 'text-slate-400 border-slate-200 hover:bg-slate-50'
                       }`}
                     >
