@@ -13,6 +13,9 @@ export const ApiConnectionStatus = () => {
         // We attempt to fetch categories as a lightweight health check
         await getCategories();
         setStatus('online');
+        setTimeout(() => {
+            setStatus('loading');
+        }, 5000);
       } catch (err: unknown) {
         setStatus('offline');
         const message = err instanceof Error ? err.message : 'Network Error or API Down';

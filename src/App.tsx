@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './components/atoms/Button';
 import { FilterBar } from './components/molecules/FilterBar';
 import { ProductCard } from './components/organisms/ProductCard';
@@ -23,25 +23,50 @@ export default function ProductCatalog() {
   // Form State
   const [formData, setFormData] = useState({ name: '', price: '', category_id: '' });
 
-  // Fetch categories once on mount
+  // Cache references to track server data and avoid redundant updates
+  const categoriesCacheRef = useRef<string>('');
+  const productsCacheRef = useRef<Record<string, string>>({});
+
+  // Fetch categories periodically (every 3 seconds)
   useEffect(() => {
-    CategoryServices.fetchAllCategories()
-      .then(setCategories)
-      .catch(err => console.error('Error fetching categories:', err));
+    const fetchCats = () => {
+      CategoryServices.fetchAllCategories()
+        .then(data => {
+          const stringified = JSON.stringify(data);
+          if (stringified !== categoriesCacheRef.current) {
+            categoriesCacheRef.current = stringified;
+            setCategories(data);
+          }
+        })
+        .catch(err => console.error('Error fetching categories:', err));
+    };
+
+    fetchCats();
+    const interval = setInterval(fetchCats, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  // Fetch products whenever the filter changes (Server-side filtering)
+  // Fetch products whenever the filter changes and periodically (every 3 seconds)
   useEffect(() => {
     const loadProducts = async (): Promise<void> => {
       try {
         const data = await ProductServices.fetchProducts(filterCategoryId);
-        if (filterCategoryId === 'All Categories') setTotalCount(data.length);
-        setProducts(data);
+        const stringified = JSON.stringify(data);
+        const currentCache = productsCacheRef.current[filterCategoryId] || '';
+
+        if (stringified !== currentCache) {
+          productsCacheRef.current[filterCategoryId] = stringified;
+          if (filterCategoryId === 'All Categories') setTotalCount(data.length);
+          setProducts(data);
+        }
       } catch (err) {
         console.error('Error loading products:', err);
       }
     };
     loadProducts();
+
+    const interval = setInterval(loadProducts, 3000);
+    return () => clearInterval(interval);
   }, [filterCategoryId]);
 
   // --- Handlers ---
@@ -54,7 +79,9 @@ export default function ProductCatalog() {
     if (!productToDelete) return;
     try {
       await ProductServices.deleteProduct(String(productToDelete.id));
-      setProducts(products.filter(p => p.id !== productToDelete.id));
+      const updatedProducts = products.filter(p => p.id !== productToDelete.id);
+      productsCacheRef.current[filterCategoryId] = JSON.stringify(updatedProducts);
+      setProducts(updatedProducts);
       setTotalCount(prev => prev - 1);
       setProductToDelete(null);
     } catch (err) {
@@ -95,10 +122,14 @@ export default function ProductCatalog() {
       const savedProduct = await ProductServices.saveProduct(productData, editingProduct?.id ? String(editingProduct.id) : undefined);
 
       if (editingProduct) {
-        setProducts(products.map(p => (p.id === editingProduct.id ? savedProduct : p)));
+        const updatedProducts = products.map(p => (p.id === editingProduct.id ? savedProduct : p));
+        productsCacheRef.current[filterCategoryId] = JSON.stringify(updatedProducts);
+        setProducts(updatedProducts);
       } else {
         if (filterCategoryId === 'All Categories' || savedProduct.category_id === filterCategoryId) {
-          setProducts([...products, savedProduct]);
+          const updatedProducts = [...products, savedProduct];
+          productsCacheRef.current[filterCategoryId] = JSON.stringify(updatedProducts);
+          setProducts(updatedProducts);
         }
         setTotalCount(prev => prev + 1);
       }
