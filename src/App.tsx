@@ -17,6 +17,7 @@ export default function ProductCatalog() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [filterCategoryId, setFilterCategoryId] = useState<string | 'All Categories'>('All Categories');
   const [totalCount, setTotalCount] = useState(0);
+  const [sortBy, setSortBy] = useState<string>('name');
 
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -58,10 +59,10 @@ export default function ProductCatalog() {
     const loadProducts = async (showSkeleton: boolean = false): Promise<void> => {
       try {
         if (showSkeleton) setIsLoading(true);
-        const data = await ProductServices.fetchProducts(filterCategoryId, currentPage);
+        const data = await ProductServices.fetchProducts(filterCategoryId, currentPage, sortBy);
         const productsArray = data.products || [];
         const stringified = JSON.stringify(productsArray);
-        const cacheKey = `${filterCategoryId}-${currentPage}`;
+        const cacheKey = `${filterCategoryId}-${currentPage}-${sortBy}`;
         const currentCache = productsCacheRef.current[cacheKey] || '';
         const newTotal = data.total || 0;
 
@@ -82,7 +83,7 @@ export default function ProductCatalog() {
 
     const interval = setInterval(() => loadProducts(false), 3000);
     return () => clearInterval(interval);
-  }, [filterCategoryId, currentPage, totalCount]);
+  }, [filterCategoryId, currentPage, totalCount, sortBy]);
 
   // --- Handlers ---
   const handleFilterChange = (categoryId: string | 'All Categories') => {
@@ -189,6 +190,8 @@ export default function ProductCatalog() {
         <FilterBar 
           currentFilter={filterCategoryId}
           onFilterChange={handleFilterChange}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
           categories={categories}
           displayedCount={products.length}
           totalCount={totalCount}

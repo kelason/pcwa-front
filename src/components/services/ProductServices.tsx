@@ -7,10 +7,10 @@ export const ProductServices = {
    * Fetches products, optionally filtered by category.
    * @param categoryId The ID of the category to filter by, or 'All Categories' to fetch all products.
    * @param page The current page number for pagination.
-   * @param limit The number of items per page for pagination.
+   * @param sortBy Optional field name to sort the results by.
    * @returns A promise that resolves to an array of products.
    */
-  fetchProducts: async (categoryId: string | 'All Categories', page: number): Promise<{ products: Product[], total: number }> => {
+  fetchProducts: async (categoryId: string | 'All Categories', page: number, sortBy?: string): Promise<{ products: Product[], total: number }> => {
     const baseUrl = getBaseUrl();
     const params = new URLSearchParams();
 
@@ -21,6 +21,11 @@ export const ProductServices = {
     
     // Match Python: page is a Query parameter
     params.append('page', page.toString());
+
+    // Match Python: sort_by is an optional Query parameter
+    if (sortBy) {
+      params.append('sort_by', sortBy);
+    }
 
     const url = `${baseUrl}/products/?${params.toString()}`;
 
