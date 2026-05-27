@@ -17,7 +17,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   totalCount,
 }) => {
   return (
-    <div className="flex items-center justify-between gap-6 mb-8 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+    <div className="flex flex-col items-center sm:flex-row justify-between gap-4 sm:gap-6 mb-8 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
       <div className="flex items-center gap-3">
         <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -34,7 +34,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </select>
         </div>
       </div>
-      <span className="text-slate-500 text-sm font-medium">
+      <span className="text-slate-500 text-sm font-medium text-center sm:text-right">
         Showing {displayedCount} of {totalCount} products
       </span>
     </div>

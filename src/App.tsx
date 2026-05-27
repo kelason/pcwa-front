@@ -170,12 +170,13 @@ export default function ProductCatalog() {
   return (
     <div className="min-h-screen bg-[#FFFFFF] font-sans text-[#00241B]">
       {/* Header */}
-      <header className="bg-[#00241B] text-white px-8 py-5 flex justify-between items-center shadow-lg border-b border-[#4E878C]">
-        <h1 className="text-xl text-white font-bold tracking-tight">Product Catalog Dashboard</h1>
+      <header className="bg-[#00241B] text-white px-4 py-4 sm:px-8 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-lg border-b border-[#4E878C]">
+        <h1 className="text-lg sm:text-xl text-white font-bold tracking-tight text-center sm:text-left">Product Catalog Dashboard</h1>
         <Button 
           onClick={handleAddClick}
           icon={<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>}
           disabled={categories.length === 0} // Disable if no categories to assign to
+          className="w-full sm:w-auto justify-center"
         >
           ADD PRODUCT
         </Button>
