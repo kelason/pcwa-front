@@ -1,7 +1,7 @@
-# Cognizant Assessment - Frontend
+# Product Catalog - Frontend
 
 ## Description
-This project is a frontend application developed for the Cognizant assessment. It is built using modern tooling to ensure high performance, type safety, and strict code quality standards. The application leverages Vite for fast development and bundling, and TypeScript for robust type checking.
+This project is the frontend for a product catalog application. It is built using modern tooling to ensure high performance, type safety, and strict code quality standards. The application leverages Vite for fast development and bundling, and TypeScript for robust type checking.
 
 ## Tech Stack
 - **Bundler:** [Vite 6](https://vite.dev/) - Next generation frontend tooling.
@@ -24,7 +24,7 @@ Ensure you have the following installed on your machine:
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd cognizant-assesment-front
+   cd pcwa-front
    ```
 
 2. **Install dependencies:**
@@ -61,4 +61,4 @@ Ensure you have the following installed on your machine:
 - **TypeScript:** Strict type-checking enabled via `tsconfig.json`.
 
 ---
-*Developed as part of a technical assessment.*
+*Product catalog frontend built with React and TypeScript.*
