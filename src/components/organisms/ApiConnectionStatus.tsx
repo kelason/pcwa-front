@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCategories } from '../../api';
+import { getCategories } from '../../../api';
 
 export const ApiConnectionStatus = () => {
   const [status, setStatus] = useState<'loading' | 'online' | 'offline'>('loading');
