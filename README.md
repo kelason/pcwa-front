@@ -9,6 +9,10 @@ This project is the frontend for a product catalog application. It is built usin
 - **Linting:** [ESLint](https://eslint.org/) with [TypeScript ESLint](https://typescript-eslint.io/) - For identifying and reporting on patterns in code.
 - **CSS Engine:** [Lightning CSS](https://lightningcss.dev/) - An extremely fast CSS parser, transformer, and minifier.
 
+## Live Demo
+
+[View the live application](https://pcwa-front.vercel.app/)
+
 ## Prototype
 
 You can view the interactive Figma prototype of this application here:
